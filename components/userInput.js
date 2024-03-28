@@ -11,8 +11,8 @@ export default function UserInput() {
         lastName: faker.person.lastName(),
         age: MIN + Math.floor(Math.random() * MAX),
         sexType: faker.person.sexType()
-    }
-    )
+    });
+
     return <>
 
     </>;
