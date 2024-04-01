@@ -1,12 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import UserInput from './components/userInput';
+import { useState } from 'react';
+import UsersList from './components/usersList';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+  [users, setUsers] = useState([]);
+
+  const addUser = (user) => {
+    setUsers([...users, user]);
+  }
+
+  return (  <NavigationContainer>
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen name="Users" component={UsersList} />
+      <Tab.Screen name="Add" component={UserInput} />
+    </Tab.Navigator>
+  </NavigationContainer>
   );
 }
 
