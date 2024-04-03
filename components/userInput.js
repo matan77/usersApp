@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet ,Dimensions} from 'react-native';
+import { View, TextInput, Button, StyleSheet, Dimensions, Text } from 'react-native';
 import { faker } from '@faker-js/faker';
+import { RadioButton } from 'react-native-paper';
+import colorHash from '../ustils/colorHash';
+import TextAvatar from 'react-native-text-avatar';
 
 const { width, height } = Dimensions.get('window');
 
@@ -13,8 +16,9 @@ const UserInput = ({ addUser }) => {
         firstName: faker.person.firstName(),
         lastName: faker.person.lastName(),
         age: String(MIN + Math.floor(Math.random() * (MAX - MIN + 1))),
-        sexType: faker.person.sexType()
+        gender: faker.person.sexType()
     });
+
 
     const handleAddUser = () => {
         addUser(user);
@@ -25,6 +29,15 @@ const UserInput = ({ addUser }) => {
 
     return (
         <View style={styles.container}>
+            <View style={styles.textAvatar}>
+                <TextAvatar
+                    backgroundColor={colorHash(user.firstName)}
+                    textColor={'#0000ff'}
+                    size={60}
+                    type={'circle'}
+                >{user.firstName}</TextAvatar>
+            </View>
+
             <TextInput
                 style={styles.input}
                 placeholder="Email"
@@ -47,22 +60,37 @@ const UserInput = ({ addUser }) => {
                 style={styles.input}
                 placeholder="Age"
                 value={user.age}
+
                 onChangeText={(text) => setUser({ ...user, age: text })}
                 keyboardType="numeric"
             />
-            <TextInput
-                style={styles.input}
-                placeholder="Sex Type"
-                value={user.sexType}
-                onChangeText={(text) => setUser({ ...user, sexType: text })}
-            />
+            <Text>Gender:</Text>
+            <View style={styles.radioContainer}>
+                <RadioButton color={styles.radioButton.color}
+                    value="male"
+
+                    status={user.gender === 'male' ? 'checked' : 'unchecked'}
+                    onPress={() => setUser({ ...user, gender: 'male' })}
+                />
+                <Text>Male</Text>
+                <RadioButton
+                    value="female"
+                    color={styles.radioButton.color}
+                    status={user.gender === 'female' ? 'checked' : 'unchecked'}
+                    onPress={() => setUser({ ...user, gender: 'female' })}
+                />
+                <Text>Female</Text>
+            </View>
             <Button title="Add User" onPress={handleAddUser} />
-        </View>
+        </View >
     );
 };
 
 const styles = StyleSheet.create({
     container: {
+        padding: width * 0.05,
+    },
+    textAvatar: {
         padding: width * 0.05,
     },
     input: {
@@ -72,6 +100,14 @@ const styles = StyleSheet.create({
         marginBottom: height * 0.02,
         paddingHorizontal: width * 0.02,
     },
+    radioContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    radioButton: {
+        color: '#0BB5FF'
+    }
+
 });
 
 export default UserInput;
