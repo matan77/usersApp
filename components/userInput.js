@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Dimensions, Text } from 'react-native';
 import { faker } from '@faker-js/faker';
 import { RadioButton } from 'react-native-paper';
-import colorHash from '../ustils/colorHash';
+import colorHash from '../utils/colorHash';
 import TextAvatar from 'react-native-text-avatar';
 
 const { width, height } = Dimensions.get('window');
