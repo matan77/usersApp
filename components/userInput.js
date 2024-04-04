@@ -81,24 +81,30 @@ const UserInput = ({ addUser }) => {
                 />
                 <Text>Female</Text>
             </View>
-            <Button title="Add User" onPress={handleAddUser} />
+            <View style={styles.radioContainer} />
+            <View style={styles.button}>
+                <Button title="Add User" onPress={handleAddUser} />
+            </View>
         </View >
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        padding: width * 0.05,
+        display: "flex",
+        flex: 1,
+        paddingHorizontal: width * 0.15,
     },
     textAvatar: {
         padding: width * 0.05,
+        alignSelf: 'center',
     },
     input: {
         height: height * 0.05,
         borderColor: 'gray',
         borderWidth: 1,
         marginBottom: height * 0.02,
-        paddingHorizontal: width * 0.02,
+        paddingHorizontal: 7
     },
     radioContainer: {
         flexDirection: 'row',
@@ -106,6 +112,10 @@ const styles = StyleSheet.create({
     },
     radioButton: {
         color: '#0BB5FF'
+    },
+    button: {
+        alignSelf: 'center',
+        width: '50%'
     }
 
 });
